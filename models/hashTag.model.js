@@ -17,7 +17,7 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
         }
 
         static associate(models) {
-            this.hasMany(models, {
+            this.hasMany(models.HashTable, {
                 foreignKey: "hash_idx",
                 allowNull: false,
                 constraints: true,

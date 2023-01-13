@@ -14,13 +14,10 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
             );
         }
         static associate(models) {
-            this.belongsTo(models, {
+            this.belongsTo(models.User, {
                 foreignKey: "userid",
             });
-        }
-
-        static associateboard(models) {
-            this.belongsTo(models, {
+            this.belongsTo(models.Board, {
                 foreignKey: "board_idx",
             });
         }

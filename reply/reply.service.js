@@ -1,5 +1,5 @@
 class ReplyService {
-    constructor({ _ReplyRepository }) {
+    constructor(_ReplyRepository) {
         this.ReplyRepository = _ReplyRepository;
     }
 

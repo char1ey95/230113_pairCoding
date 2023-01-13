@@ -1,11 +1,12 @@
 class ReplyController {
-    constructor({ _ReplyService }) {
+    constructor(_ReplyService) {
         this.ReplyService = _ReplyService;
     }
 
     async getAll(req, res, next) {
         try {
-            const board_idx = req.params;
+            const { board_idx } = req.params;
+
             const result = await this.ReplyService.getServiceAll(board_idx);
             console.log(result);
             res.json(result);

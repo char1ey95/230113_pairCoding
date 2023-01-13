@@ -22,11 +22,14 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
             );
         }
 
-        // static associate(Board) {
-        //     this.hasMany(Board, {
-        //         foreingKey: "userid",
-        //     });
-        // }
+        static associate(Board) {
+            this.hasMany(Board, {
+                foreignKey: "userid",
+                allowNull: false,
+                constraints: true,
+                onDelete: "cascade",
+            });
+        }
     }
     User.initial();
     return User;

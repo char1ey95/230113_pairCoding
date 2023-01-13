@@ -15,9 +15,9 @@ class ReplyService {
         }
     }
 
-    async postServiceOne({ reply }) {
+    async postServiceOne({ userid, content, board_idx }) {
         try {
-            const result = await this.ReplyRepository.postRepositoryOne({ reply });
+            const result = await this.ReplyRepository.postRepositoryOne({ userid, content, board_idx });
             return result;
         } catch (error) {
             throw new Error(error);
@@ -35,12 +35,9 @@ class ReplyService {
         }
     }
 
-    async putServiceOne(idx, content) {
+    async putServiceOne({ idx, content }) {
         try {
-            const board = {};
-            board.idx = idx;
-            board.content = content;
-            const result = await this.ReplyRepository.putRepositoryOne(board);
+            const result = await this.ReplyRepository.putRepositoryOne({ idx, content });
             return result;
         } catch (error) {
             throw new Error(error);
@@ -49,9 +46,7 @@ class ReplyService {
 
     async deleteServiceOne(idx) {
         try {
-            const board = {};
-            board.idx = idx;
-            const result = await this.BoardRepoistory.deleteRepositoryOne(board);
+            const result = await this.ReplyRepository.delete(idx);
 
             return result;
         } catch (error) {

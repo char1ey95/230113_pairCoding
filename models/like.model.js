@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, DataTypes, Model }) => {
-    class Like extends Model {
+    class Likes extends Model {
         static initial() {
             return this.init(
                 {
@@ -17,18 +17,15 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
             );
         }
         static associate(models) {
-            this.belongsTo(models, {
+            this.belongsTo(models.User, {
                 foreignKey: "userid",
             });
-        }
-
-        static associateboard(models) {
-            this.belongsTo(models, {
+            this.belongsTo(models.Board, {
                 foreignKey: "board_idx",
             });
         }
     }
-    Like.initial();
-    return Like;
+    Likes.initial();
+    return Likes;
 };
 

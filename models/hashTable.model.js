@@ -16,14 +16,11 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
                 }
             );
         }
-        static associateHash(models) {
-            this.belongsTo(models, {
+        static associate(models) {
+            this.belongsTo(models.HashTag, {
                 foreignKey: "hash_idx",
             });
-        }
-
-        static associateboard(models) {
-            this.belongsTo(models, {
+            this.belongsTo(models.Board, {
                 foreignKey: "board_idx",
             });
         }

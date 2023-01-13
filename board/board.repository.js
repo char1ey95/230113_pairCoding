@@ -1,47 +1,52 @@
 class BoardRepository {
-    constructor({ _models }){
-        this.model = _models
+    constructor( _models ){
+        this.models = _models
     }
 
     async getRepositoryAll (){
         try {
-            const result = await this.model.findAll()
+            const result = await this.models.findAll({ raw : true })
+            return result
         } catch (error) {
-            
+            throw new Error(error)
         }
     }
 
     // post
-    async postRepositoryOne ({ userid, content }){
+    async postRepositoryOne ({ userid, content, subject }){
         try {
-            const result = await this.model.create(userid, content)
+            const result = await this.models.create({ userid, content, subject })
+            return result
         } catch (error) {
-            
+            throw new Error(error)
         }
     }
 
     // view
-    async getRepositoryOne ({ idx }){
+    async getRepositoryOne ({ id }){
         try {
-            const result = await this.model.findOne(idx)
+            const result = await this.models.findOne({ where : { id: id}})
+            return result.dataValues
         } catch (error) {
-            
+            throw new Error(error)
         }
     }
 
-    async putRepositoryOne ({ idx, content }){
+    async putRepositoryOne ({ id, content }){
         try {
-            const result = await this.model.update(idx, content)
+            const result = await this.models.update({ content }, { where : { id: id}})
+            return result
         } catch (error) {
-            
+            throw new Error(error)
         }
     }
 
-    async delete ({ idx }){
+    async deleteRepositoryOne ( id ){
         try {
-            const result = await this.model.destroy(idx)
+            const result = await this.models.destroy({ where : { id: id}})
+            return result
         } catch (error) {
-            
+            throw new Error(error)
         }
     }
 }

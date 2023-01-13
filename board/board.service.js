@@ -1,6 +1,6 @@
 class BoardService {
-    constructor({ _BoardRepository,  }){
-        this.BoardRepoistory = _BoardRepository
+    constructor( BoardRepository ){
+        this.BoardRepoistory = BoardRepository
     }
 
     async getServiceAll(){
@@ -12,11 +12,12 @@ class BoardService {
         }
     }
     
-    async postServiceOne(userid, content){
+    async postServiceOne({ userid, content, subject }){
         try {
             const board = {}
             board.userid = userid
             board.content = content
+            board.subject = subject
             const result = await this.BoardRepoistory.postRepositoryOne(board)
             return result
         } catch (error) {
@@ -24,22 +25,21 @@ class BoardService {
         }
     }
     
-    async getServiceOne(idx){
+    async getServiceOne(id){
         try {
-            const board = {}
-            board.idx = idx
-            const result = await this.BoardRepoistory.getRepositoryOne(board)
+            const result = await this.BoardRepoistory.getRepositoryOne(id)
             return result
         } catch (error) {
             throw new Error(error)
         }
     }
     
-    async putServiceOne(idx, content){
+    async putServiceOne({id, content}){
         try {
             const board = {}
-            board.idx = idx
+            board.id = id
             board.content = content
+            console.log(id, content)
             const result = await this.BoardRepoistory.putRepositoryOne(board)
             return result
         } catch (error) {
@@ -47,11 +47,9 @@ class BoardService {
         }
     }
     
-    async deleteServiceOne(idx){
+    async deleteServiceOne(id){
         try {
-            const board = {}
-            board.idx = idx
-            const result = await this.BoardRepoistory.deleteRepositoryOne(board)
+            const result = await this.BoardRepoistory.deleteRepositoryOne(id)
             return result
         } catch (error) {
             throw new Error(error)

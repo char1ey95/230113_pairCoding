@@ -23,11 +23,6 @@ HashTag.associate(HashTable);
 HashTable.associateHash(HashTag);
 HashTable.associateboard(Board);
 
-(async () => {
-    await sequelize.sync({ force: true });
-    await User.create({ userid: "web7722", userpw: "1234", username: "test1" });
-    await User.create({ userid: "admin", userpw: "1234", username: "admin" });
-})();
 
 module.exports = {
     sequelize,

@@ -25,7 +25,11 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
                 }
             );
         }
-        // static associate(User) {}
+        static associate(User) {
+            this.belongsTo(User, {
+                foreignKey: "userid",
+            });
+        }
     }
     Board.boardinit();
     return Board;

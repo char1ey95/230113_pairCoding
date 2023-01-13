@@ -22,8 +22,8 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
             );
         }
 
-        static associate(Board) {
-            this.hasMany(Board, {
+        static associate(models) {
+            this.hasMany(models, {
                 foreignKey: "userid",
                 allowNull: false,
                 constraints: true,

@@ -3,10 +3,6 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
         static boardinit() {
             return this.init(
                 {
-                    userid: {
-                        type: DataTypes.STRING(30),
-                        allowNull: false,
-                    },
                     subject: {
                         type: DataTypes.STRING(100),
                         allowNull: false,
@@ -19,6 +15,10 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
                         type: DataTypes.DATE,
                         defaultValue: sequelize.fn("now"),
                     },
+                    hit: {
+                        type: DataTypes.INTEGER,
+                        defaultValue: 0,
+                    },
                 },
                 {
                     sequelize,
@@ -28,6 +28,15 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
         static associate(User) {
             this.belongsTo(User, {
                 foreignKey: "userid",
+            });
+        }
+
+        static associatehasmany(models) {
+            this.hasMany(models, {
+                foreignKey: "board_idx",
+                allowNull: false,
+                constraints: true,
+                onDelete: "cascade",
             });
         }
     }

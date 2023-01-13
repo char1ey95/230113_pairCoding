@@ -17,7 +17,7 @@ router.put('/:idx', (req, res, next) => {
     res.send('123')
 })
 
-router.delete('/:idx', (res, req, next) => { 
+router.delete('/:idx', (req, res, next) => { 
     res.send('123')
 })
 

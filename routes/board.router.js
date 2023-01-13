@@ -1,25 +1,16 @@
 const express = require('express')
 const router = express.Router()
+const { controller } = require('../board/board.module')
 
-router.get('/', (req, res, next) => { 
-    res.send('123')
-})
+router.get('/', (req, res, next) => controller.getAll(req, res, next))
 
-router.post('/', (req, res, next) => { 
-    res.send('123')
-})
+router.post('/', (req, res, next) => controller.postOne(req, res, next))
 
-router.get('/:idx', (req, res, next) => { 
-    res.send('123')
-})
+router.get('/:id', (req, res, next) => controller.getOne(req, res, next))
 
-router.put('/:idx', (req, res, next) => { 
-    res.send('123')
-})
+router.put('/:id', (req, res, next) => controller.putOne(req, res, next))
 
-router.delete('/:idx', (req, res, next) => { 
-    res.send('123')
-})
+router.delete('/:id', (req, res, next) => controller.deleteOne(req, res, next))
 
 
 module.exports = router

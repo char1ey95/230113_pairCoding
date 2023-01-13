@@ -1,24 +1,18 @@
-// create table `user` (
-// userid VARCHAR(30) PRIMARY KEY,
-// userpw VARCHAR(64) NOT NULL,
-// username VARCHAR(20)
-// )
-
-module.exports = (sequelize, Sequelize) => {
-    class User extends Sequelize.Model {
-        static initialize() {
+module.exports = ({ sequelize, DataTypes, Model }) => {
+    class User extends Model {
+        static initial() {
             return this.init(
                 {
                     userid: {
-                        type: Sequelize.STRING(30),
+                        type: DataTypes.STRING(30),
                         primaryKey: true,
                     },
                     userpw: {
-                        type: Sequelize.STRING(64),
+                        type: DataTypes.STRING(64),
                         allowNull: false,
                     },
                     username: {
-                        type: Sequelize.STRING(20),
+                        type: DataTypes.STRING(10),
                         allowNull: false,
                     },
                 },
@@ -27,15 +21,14 @@ module.exports = (sequelize, Sequelize) => {
                 }
             );
         }
-        static associate(models) {
-            this.hasMany(models.Board, {
-                foreingKey: "userid",
-            });
-        }
+
+        // static associate(Board) {
+        //     this.hasMany(Board, {
+        //         foreingKey: "userid",
+        //     });
+        // }
     }
-
-    User.initialize();
-
+    User.initial();
     return User;
 };
 

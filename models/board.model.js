@@ -1,35 +1,23 @@
-// create table `board`(
-// id INT PRIMARY KEY AUTO_INCREMENT,
-// subject VARCHAR(100) NOT NULL,
-// content TEXT NOT NULL,
-// userid VARCHAR(30) NOT NULL,
-// register_date datetime default now(),
-// hit INT default 0
-// )
-
-module.exports = (sequelize, Sequelize) => {
-    class Board extends Sequelize.Model {
-        static initialize() {
+module.exports = ({ sequelize, DataTypes, Model }) => {
+    class Board extends Model {
+        static boardinit() {
             return this.init(
                 {
+                    userid: {
+                        type: DataTypes.STRING(30),
+                        allowNull: false,
+                    },
                     subject: {
-                        type: Sequelize.STRING(100),
+                        type: DataTypes.STRING(100),
                         allowNull: false,
                     },
                     content: {
-                        type: Sequelize.TEXT,
-                        allowNull: false,
+                        type: DataTypes.TEXT,
+                        allowNull: true,
                     },
-                    registerDate: {
-                        type: Sequelize.DATE,
-                        defaultValue: Sequelize.fn("NOW"),
-                    },
-                    userid: {
-                        type: Sequelize.STRING(30),
-                    },
-                    hit: {
-                        type: Sequelize.INTEGER,
-                        defaultValue: 0,
+                    register: {
+                        type: DataTypes.DATE,
+                        defaultValue: sequelize.fn("now"),
                     },
                 },
                 {
@@ -37,13 +25,9 @@ module.exports = (sequelize, Sequelize) => {
                 }
             );
         }
-        static associate(models) {
-            this.belongsTo(models.User, {
-                //자식은 belongsTo 부모는 hasMany
-                foreingKey: "userid",
-            });
-        }
+        // static associate(User) {}
     }
-    return Board.initialize();
+    Board.boardinit();
+    return Board;
 };
 
